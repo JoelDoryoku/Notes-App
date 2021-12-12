@@ -1,5 +1,6 @@
 ---
-// src/layouts/BaseLayout.astro
+import AllNotes from '../components/AllNotes.svelte';
+import NewNote from '../components/NewNote.svelte';
 const {title} = Astro.props;
 ---
 <html lang="es">
@@ -9,8 +10,19 @@ const {title} = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<title>{title}</title>
 		<link rel="stylesheet" type="text/css" href={Astro.resolve('../styles/output.scss')} />
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
 	</head>
-	<body>
-		<slot />
+	<body class="flex space-x-4 bg-neutral-200">
+        <nav class="flex flex-col h-screen w-2/12 p-4 bg-neutral-800">
+            <ul class="space-y-4">
+                <li>
+                    <h1 class="text-white font-bold text-2xl text-center">Notes App</h1>
+                </li>
+                <li><NewNote client:load/></li>
+            </ul>
+        </nav>
+		<div class="w-full h-screen p-4">
+            <AllNotes />
+        </div>
 	</body>
 </html>

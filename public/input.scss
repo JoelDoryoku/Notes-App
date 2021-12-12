@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.test {
-    .app {
-        padding: 1rem;
-    }
+* {
+    box-sizing: border-box;
 }
