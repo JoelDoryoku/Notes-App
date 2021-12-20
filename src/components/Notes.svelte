@@ -16,13 +16,17 @@
     }
 
     function saveNote() {
-        localStorage.setItem(localStorage.getItem('index'), newNoteText.value);
-        localStorage.setItem('index', parseInt(localStorage.getItem('index')) + 1);
+        if (newNoteText.value != "") {
+            localStorage.setItem(localStorage.getItem('index'), newNoteText.value);
+            localStorage.setItem('index', parseInt(localStorage.getItem('index')) + 1);
 
-        newNoteText.value = '';
-        newNoteElement.classList.add('hidden');
+            newNoteText.value = '';
+            newNoteElement.classList.add('hidden');
 
-        getNotes();
+            getNotes();
+        } else {
+            newNoteText.value = 'Please enter a note';
+        }
     }
 
     function cancelNote() {
@@ -42,10 +46,10 @@
 </script>
 
 {#each notesArray as note}
-<div>{note}</div>
+<div class="border-2 border-black rounded-xl w-64 h-64 break-words p-4 overflow-hidden">{note}</div>
 {/each}
 
-<button on:click={newNote} class="bg-green-700 text-center w-full h-10 rounded-xl text-lg hover:bg-green-600 transition-all">
+<button on:click={newNote} class="bg-green-700 absolute bottom-4 right-4 text-center w-52 h-14 rounded-xl text-lg hover:bg-green-600 transition-all">
     <i class="fas fa-plus text-white"></i> <i class="font-bold text-white not-italic">New Note</i>
 </button>
 

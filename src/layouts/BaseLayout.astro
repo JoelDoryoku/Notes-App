@@ -19,7 +19,7 @@ const {title} = Astro.props;
                 </li>
             </ul>
         </nav>
-		<div class="w-full h-screen p-4">
+		<div class="w-full h-screen p-4 flex flex-wrap gap-4 overflow-x-hidden overflow-y-scroll hideScrollbar">
             <AllNotes client:load />
         </div>
 	</body>

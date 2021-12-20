@@ -9,3 +9,9 @@
 .newNoteButton {
     @apply rounded-xl w-44 h-10 text-white;
 }
+
+.hideScrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    -webkit-scrollbar: none;  /* Chrome, Safari and Opera */
+}
