@@ -5,3 +5,7 @@
 * {
     box-sizing: border-box;
 }
+
+.newNoteButton {
+    @apply rounded-xl w-44 h-10 text-white;
+}

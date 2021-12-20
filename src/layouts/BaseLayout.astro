@@ -1,6 +1,5 @@
 ---
-import AllNotes from '../components/AllNotes.svelte';
-import NewNote from '../components/NewNote.svelte';
+import AllNotes from '../components/Notes.svelte';
 const {title} = Astro.props;
 ---
 <html lang="es">
@@ -18,11 +17,10 @@ const {title} = Astro.props;
                 <li>
                     <h1 class="text-white font-bold text-2xl text-center">Notes App</h1>
                 </li>
-                <li><NewNote client:load/></li>
             </ul>
         </nav>
 		<div class="w-full h-screen p-4">
-            <AllNotes />
+            <AllNotes client:load />
         </div>
 	</body>
 </html>
