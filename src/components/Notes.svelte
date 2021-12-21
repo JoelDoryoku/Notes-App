@@ -46,12 +46,38 @@
         notesArray = notesArray;
     }
 
+    function deleteNote(index) {
+        localStorage.setItem(index, "");
+
+        cleanIndex();
+        getNotes();
+    }
+
     function splitNote(note, charToSplit, index) {
         return note.split(charToSplit)[index];
     }
+
+    function cleanIndex() {
+        let emptyIndex;
+
+        for (let i = 0; i < localStorage.getItem('index'); i++) {
+            if (localStorage.getItem(i) == "") {
+                emptyIndex = i;
+                break;
+            }
+        }
+
+        if (emptyIndex != undefined) {
+            for (let i = emptyIndex; i < localStorage.getItem('index'); i++) {
+                localStorage.setItem(i, localStorage.getItem(i + 1));
+            }
+
+            localStorage.setItem('index', parseInt(localStorage.getItem('index')) - 1);
+        }
+    }
 </script>
 
-{#each notesArray as note}
+{#each notesArray as note, index}
 <div class="border-2 border-neutral-800 rounded-xl w-full h-64 overflow-hidden bg-neutral-200/80">
     <div class="border-b-2 border-neutral-800 flex justify-between">
         <header class="p-4 font-bold">
@@ -62,7 +88,7 @@
         {/if}
         </header>
 
-        <button class="bg-red-700 p-4"><i class="fas fa-trash text-white"></i></button>
+        <button on:click={() => {deleteNote(index)}} class="bg-red-700 p-4"><i class="fas fa-trash text-white"></i></button>
     </div>
     <p class="m-4 h-40 overflow-hidden break-words">{splitNote(note, "&", 0)}</p>
 </div>
