@@ -11,7 +11,7 @@ const {title} = Astro.props;
 		<link rel="stylesheet" type="text/css" href={Astro.resolve('../styles/output.scss')} />
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
 	</head>
-	<body class="flex space-x-4 bg-neutral-200">
+	<body class="flex bg-neutral-300/80">
         <nav class="flex flex-col h-screen w-2/12 p-4 bg-neutral-800">
             <ul class="space-y-4">
                 <li>
@@ -19,7 +19,7 @@ const {title} = Astro.props;
                 </li>
             </ul>
         </nav>
-		<div class="w-full h-screen p-4 flex flex-wrap gap-4 overflow-x-hidden overflow-y-scroll hideScrollbar">
+		<div class="w-full h-screen p-4 grid grid-cols-4 gap-4 overflow-x-hidden overflow-y-scroll hideScrollbar">
             <AllNotes client:load />
         </div>
 	</body>

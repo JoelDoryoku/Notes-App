@@ -13,11 +13,12 @@
 
     function newNote() {
         newNoteElement.classList.remove('hidden');
+        newNoteText.focus();
     }
 
     function saveNote() {
         if (newNoteText.value != "") {
-            localStorage.setItem(localStorage.getItem('index'), newNoteText.value);
+            localStorage.setItem(localStorage.getItem('index'), `${newNoteText.value}&${new Date().toLocaleString()}`);
             localStorage.setItem('index', parseInt(localStorage.getItem('index')) + 1);
 
             newNoteText.value = '';
@@ -26,6 +27,7 @@
             getNotes();
         } else {
             newNoteText.value = 'Please enter a note';
+            newNoteText.focus();
         }
     }
 
@@ -43,10 +45,27 @@
 
         notesArray = notesArray;
     }
+
+    function splitNote(note, charToSplit, index) {
+        return note.split(charToSplit)[index];
+    }
 </script>
 
 {#each notesArray as note}
-<div class="border-2 border-black rounded-xl w-64 h-64 break-words p-4 overflow-hidden">{note}</div>
+<div class="border-2 border-neutral-800 rounded-xl w-full h-64 overflow-hidden bg-neutral-200/80">
+    <div class="border-b-2 border-neutral-800 flex justify-between">
+        <header class="p-4 font-bold">
+        {#if splitNote(note, "&", 1) != undefined}
+            {splitNote(note, "&", 1)}
+        {:else}
+            Date doesn't exist :(
+        {/if}
+        </header>
+
+        <button class="bg-red-700 p-4"><i class="fas fa-trash text-white"></i></button>
+    </div>
+    <p class="m-4 h-40 overflow-hidden break-words">{splitNote(note, "&", 0)}</p>
+</div>
 {/each}
 
 <button on:click={newNote} class="bg-green-700 absolute bottom-4 right-4 text-center w-52 h-14 rounded-xl text-lg hover:bg-green-600 transition-all">
@@ -57,7 +76,7 @@
     <div class="h-1/2 w-1/4">
         <!-- Note Form -->
         <div class="w-full">
-            <textarea class="w-full h-full rounded-xl p-4" cols="30" rows="10" bind:this={newNoteText}></textarea>
+            <textarea class="w-full h-full rounded-xl p-4 auto" cols="30" rows="10" bind:this={newNoteText}></textarea>
         </div>
 
         <!-- Buttons -->
