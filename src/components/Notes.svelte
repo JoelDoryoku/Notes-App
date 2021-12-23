@@ -1,4 +1,6 @@
 <script>
+    import { searchValue } from './Search.svelte';
+
     let notesArray = [];
     let newNoteElement;
     let newNoteText;
@@ -88,7 +90,7 @@
         {/if}
         </header>
 
-        <button on:click={() => {deleteNote(index)}} class="bg-red-700 p-4"><i class="fas fa-trash text-white"></i></button>
+        <button on:click={() => {deleteNote(index)}} class="bg-red-700 p-4 hover:bg-red-600"><i class="fas fa-trash text-white"></i></button>
     </div>
     <p class="m-4 h-40 overflow-hidden break-words">{splitNote(note, "&", 0)}</p>
 </div>

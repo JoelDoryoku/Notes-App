@@ -1,5 +1,6 @@
 ---
 import AllNotes from '../components/Notes.svelte';
+import Search from '../components/Search.svelte';
 const {title} = Astro.props;
 ---
 <html lang="es">
@@ -16,6 +17,9 @@ const {title} = Astro.props;
             <ul class="space-y-4">
                 <li>
                     <h1 class="text-white font-bold text-2xl text-center">Notes App</h1>
+                </li>
+                <li>
+                    <Search client:load />
                 </li>
             </ul>
         </nav>
