@@ -80,7 +80,7 @@
 </script>
 
 {#each notesArray as note, index}
-<div class="border-2 border-neutral-800 rounded-xl w-full h-64 overflow-hidden bg-neutral-200/80">
+<div class="border-2 border-neutral-800 rounded-xl w-full h-64 overflow-hidden bg-neutral-200/80 {splitNote(note, "&", 1).match($searchValue) ? '' : 'hidden'}">
     <div class="border-b-2 border-neutral-800 flex justify-between">
         <header class="p-4 font-bold">
         {#if splitNote(note, "&", 1) != undefined}

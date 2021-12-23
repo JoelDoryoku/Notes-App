@@ -1,7 +1,7 @@
-<script type="module">
+<script context="module">
     import { writable } from 'svelte/store';
 
     export let searchValue = writable('');
 </script>
 
-<input type="text" name="search" on:input={(e) => {searchValue = writable(e.target.value)}}>
+<input class="rounded-xl w-full p-2" type="text" name="search" placeholder="Search by date..." on:input={(e) => {$searchValue = e.target.value}}>
