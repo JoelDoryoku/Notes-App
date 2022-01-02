@@ -4,6 +4,9 @@
     let notesArray = [];
     let newNoteElement;
     let newNoteText;
+    let deleteConfirmElement;
+    let deleteConfirmText;
+    let idDeleteNote = null;
 
     if (typeof window !== 'undefined') {
         if (localStorage.getItem('index') === null) {
@@ -49,10 +52,24 @@
     }
 
     function deleteNote(index) {
-        localStorage.setItem(index, "");
+        deleteConfirmText.innerHTML = `Are you sure you want to delete this note with Date: "${splitNote(localStorage.getItem(index), "&", 1)}"?`;
+        deleteConfirmElement.classList.remove('hidden');
+
+        idDeleteNote = index;
+    }
+
+    function confirmDeleteNote() {
+        localStorage.setItem(idDeleteNote, "");
+
+        deleteConfirmElement.classList.add('hidden');
 
         cleanIndex();
         getNotes();
+    }
+
+    function cancelDelete() {
+        deleteConfirmElement.classList.add('hidden');
+        idDeleteNote = null;
     }
 
     function splitNote(note, charToSplit, index) {
@@ -111,6 +128,21 @@
         <div class="flex justify-between pt-4">
             <button on:click={saveNote} class="newNoteButton bg-green-500">Create</button>
             <button on:click={cancelNote} class="newNoteButton bg-red-500">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="deleteConfirm" class="absolute top-0 left-0 w-screen h-screen bg-neutral-500/50 flex justify-center items-center hidden" bind:this={deleteConfirmElement}>
+    <div class="h-1/2 w-1/4">
+        <!-- Note Form -->
+        <div class="w-full">
+            <p class="w-full h-full rounded-xl p-4 auto bg-white" bind:this={deleteConfirmText}></p>
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex justify-between pt-4">
+            <button on:click={confirmDeleteNote} class="newNoteButton bg-green-500">Confirm</button>
+            <button on:click={cancelDelete} class="newNoteButton bg-red-500">Cancel</button>
         </div>
     </div>
 </div>
